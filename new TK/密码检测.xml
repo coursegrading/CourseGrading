@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<fps version="1.2" url="https://github.com/zhblue/freeproblemset/">
+	<generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
+	<item>
+<title><![CDATA[密码检测]]></title>
+<time_limit unit="s"><![CDATA[2]]></time_limit>
+<memory_limit unit="mb"><![CDATA[2048]]></memory_limit>
+
+<description><![CDATA[<p class="p0">
+	有时候你可能为了注册山东建筑大学的<span>OJ</span><span>经常因为密码不符合要求，而多次修改密码。那么现在我来告诉你们山建</span><span>OJ</span><span>密码的要求：</span>
+</p>
+<p class="p0">
+	*<span>密码的长度至少是五个符号</span>
+</p>
+<p class="p0">
+	*<span>密码至少含有一个大写的英文字母</span>
+</p>
+<p class="p0">
+	*<span>密码至少含有一个小写的英文字母</span>
+</p>
+<p class="p0">
+	*<span>密码至少包含一个数字</span>
+</p>
+<p class="p0">
+	如果有其中一条不符合要求，那么就是不合法的密码。现在给你一些密码，让你判断是否合法。
+</p>]]></description>
+<input><![CDATA[<p class="p0">
+	第一行是一个整数<span>T</span><span>，包含</span><span>T</span><span>组数据。接下来每行是一串密码，长度小于</span><span>100.</span>
+</p>]]></input> 
+<output><![CDATA[<p class="p0">
+	如果是密码符合要求，则输出<span>Correct</span><span>，否则输出&nbsp;</span><span>Too&nbsp;weak</span><span>。</span>
+</p>]]></output>
+<sample_input><![CDATA[3
+Abacaba
+X123456
+CONTEST_is_STARTED!!11]]></sample_input>
+<sample_output><![CDATA[Too weak
+Too weak
+Correct]]></sample_output>
+  <test_input><![CDATA[20
+abacaba
+X123456
+CONTEST_is_STARTED!!11
+Ca1
+12345678
+ABCabc123
+____!!!__
+sdfsljJJJ9999999999999999999
+sldfjslkdjfklsjdf((((!dsfklk123
+10ABCabc
+dlfjsldkjflskdjfksd9999dklfjJJ
+sdfsdfjlsdjflskjdf
+jslfjjjjjjioioijiusdf12333
+JFJLJLSDJFLSDJFjklsjdf
+lsjdfsljfJSLFJLJS89898
+ljdslfjslkjfx(((sdfljsdkfj&&&
+sdflkjJLJKLJF89sdfslfj
+181920ABCxyz
+sdslkfjslkflksfjjlkjlkj080980988
+jkjlkjkjLKJLKJLKJ878787]]></test_input>
+<test_output><![CDATA[Too weak
+Too weak
+Correct
+Too weak
+Too weak
+Correct
+Too weak
+Correct
+Too weak
+Correct
+Correct
+Too weak
+Too weak
+Too weak
+Correct
+Too weak
+Correct
+Correct
+Too weak
+Correct
+]]></test_output>
+<hint><![CDATA[]]></hint>
+<source><![CDATA[ACM]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<ctype.h>
+#include<string.h>
+int main(void)
+{
+	int n,i,ok,d,c;
+	char a[1000];
+scanf("%d",&n);
+while(n--)
+{
+ok=0;
+scanf("%s",a);
+d=strlen(a);
+if(d<5)  ok=-1;
+for(i=0;i<d;i++)
+{
+
+	c=isdigit(a[i]);
+	if(c)
+	{
+	ok++;
+	break;
+	
+	}
+
+}
+
+for(i=0;i<d;i++)
+{
+
+c=islower(a[i]);
+
+if(c)
+{
+ok++;
+break;
+
+}
+
+
+}
+
+for(i=0;i<d;i++)
+{
+
+c=isupper(a[i]);
+
+if(c)
+{
+ok++;
+break;
+
+}
+
+
+}
+
+if(ok==3)
+printf("Correct\n");
+else
+printf("Too weak\n");
+
+}
+
+
+
+
+}]]></solution>
+			<solution language="C++"><![CDATA[#include<stdio.h>
+#include<string.h>
+char s[107];
+int main()
+{
+    //freopen("in.txt","r",stdin);
+    //freopen("out.txt","w",stdout);
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%s",s);
+        int len=strlen(s);
+        bool large=false,small=false,digit=false;
+        if(len<5)printf("Too weak\n");
+        else
+        {
+            for(int i=0;i<len;i++)
+            {
+                if(s[i]>='a'&&s[i]<='z')small=true;
+                if(s[i]>='A'&&s[i]<='Z')large=true;
+                if(s[i]>='0'&&s[i]<='9')digit=true;
+            }
+            if(small&&large&&digit)printf("Correct\n");
+            else printf("Too weak\n");
+        }
+    }
+    return 0;
+}
+]]></solution>
+			<solution language="Java"><![CDATA[import java.util.Scanner;
+class Main{
+	public static void main(String[] args) {
+		Scanner reader = new Scanner(System.in);
+		int T = reader.nextInt();
+		for (int j = 0; j < T; j++) {
+			String str = reader.next();
+			char[] ch = str.toCharArray();
+			int a = 0, b = 0, c = 0;
+			if (ch.length < 5) {
+				System.out.println("Too weak");
+			} else {
+				for (int i = 0; i < ch.length; i++) {
+					if (ch[i] >= 'A' && ch[i] <= 'Z') {
+						a = a + 1;
+					}
+					if (ch[i] >= 'a' && ch[i] <= 'z'){
+						b = b + 1;
+					}
+					if(ch[i] >= '0' && ch[i] <= '9'){
+						c=c+1;
+					}
+				}
+				if(a>0&&b>0&&c>0){
+					System.out.println("Correct");
+				}
+				else System.out.println("Too weak");
+			}
+		}
+	}
+}]]></solution>
+	</item>
+</fps>

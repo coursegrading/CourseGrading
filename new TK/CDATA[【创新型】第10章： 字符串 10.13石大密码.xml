@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<fps version="1.2" url="https://github.com/zhblue/freeproblemset/">
+	<generator name="HUSTOJ" url="https://github.com/zhblue/hustoj/"/>
+	<item>
+<title><![CDATA[【创新型】第10章： 字符串 10.13石大密码]]></title>
+<time_limit unit="s"><![CDATA[1]]></time_limit>
+<memory_limit unit="mb"><![CDATA[128]]></memory_limit>
+
+<description><![CDATA[<p>
+	小贾同学在石油大学非常危险，因此他的每一条信息都是加密的，消息加密的方法是，对消息原文中的每一个字母，分别用该字母之后的第五个字母替换，并且消息内容都是大写的。
+</p>
+<p>
+	密码字母:A B C D E F G H I&nbsp;J K L M N O P Q R S T U V W X Y Z
+</p>
+<p>
+	密码字母:F G H I J K L M N O P Q R S T U V W X Y Z A B C D E
+</p>]]></description>
+<input><![CDATA[<p>
+	第一行输入一个数字n，一下输入n行数据（包括空格，逗号，句号【英文格式下的符号】）每行数据不超过200个字符。
+</p>]]></input> 
+<output><![CDATA[输出n行数据，每一行与输入的数据相对应。]]></output>
+<sample_input><![CDATA[1
+NS BFW,JAJSYX TK NRUTWYFSHJ FWJ YMJ WJXZQY TK YWNANFQ HFZXJX]]></sample_input>
+<sample_output><![CDATA[IN WAR,EVENTS OF IMPORTANCE ARE THE RESULT OF TRIVIAL CAUSES]]></sample_output>
+  <test_input><![CDATA[3
+NS BFW,JAJSYX TK NRUTWYFSHJ FWJ YMJ WJXZQY TK YWNANFQ HFZXJX
+N BTZQI WFYMJW GJ KNWXY NS F QNYYQJ NGJWNFS ANQQFLJ YMFS XJHTSI NS WTRJ
+IFSLJW PSTBX KZQQ BJQQ YMFY HFJXFW NX RTWJ IFSLJWTZX YMFS MJ]]></test_input>
+<test_output><![CDATA[IN WAR,EVENTS OF IMPORTANCE ARE THE RESULT OF TRIVIAL CAUSES
+I WOULD RATHER BE FIRST IN A LITTLE IBERIAN VILLAGE THAN SECOND IN ROME
+DANGER KNOWS FULL WELL THAT CAESAR IS MORE DANGEROUS THAN HE]]></test_output>
+<hint><![CDATA[<p>
+	&nbsp;
+</p>]]></hint>
+<source><![CDATA[高级语言程序设计I-第10章：字符串]]></source>
+		<solution language="C"><![CDATA[#include<stdio.h>
+#include<string.h>
+void decipher(char message[]);
+char m[100][201];
+int main()
+{
+	char message[201];
+	int n;
+	scanf("%d",&n);
+	getchar();
+	for(int i=0;i<n;i++)
+		decipher(message);
+	for(int i=0;i<n;i++)
+	{
+		if(i!=n-1)
+		printf("%s\n",m[i]);
+		else printf("%s",m[i]);
+	}
+}
+
+void decipher(char message[])
+{
+	static int k=0;
+	char plain[27]="VWXYZABCDEFGHIJKLMNOPQRSTU";
+	int i,cipherLen;
+	gets(message);
+	cipherLen=strlen(message);
+	for(i=0;i<cipherLen;i++)
+		if(message[i]>='A'&&message[i]<='Z')
+			message[i]=plain[message[i]-'A'];
+	strcpy(m[k],message);
+	k++;
+}]]></solution>
+	</item>
+</fps>
